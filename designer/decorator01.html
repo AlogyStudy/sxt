@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			//装饰者模式  不仅可以用在类上， 还可以用在函数上.
+			//返回当前时间的字符串表示.
+			function getDate(){
+				return (new Date()).toString();
+			}
+			
+			//包装函数  ，(装饰者函数)
+			function UppCaseDecorator( fn ){
+				return function(){
+					return fn.apply(this,arguments).toUpperCase();
+				}
+			}
+			
+			console.log( getDate() );
+			var getDecoratorDate=UppCaseDecorator(getDate);
+			console.log( getDecoratorDate() );
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

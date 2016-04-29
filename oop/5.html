@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			//简单原型   -- 使用 Object。definedProperty(); // 表示回 当前的构造器.
+/*			function Person(){  }
+			Person.prototype={
+//				constructor: Person, //必须得表示原型对象的构造器   , 如果 不加constructor属性的话，Person的原型就是Object
+				name: 'xixi',
+				age: 22,
+				say: function(){
+					alert(this.name);
+				}
+			}
+//			ECMA5 给原型对象重新设置构造器的方法 Object.defineProperty()
+			//FF4+ ie8;  
+			// 3 个参数 .  参数1：重新设置构造器的对象，参数2:设置什么属性。参数3:options配置项
+			Object.defineProperty(Person.prototype,'constructor',{
+				enumerable: false,
+				value: Person
+			});*/
+			
+/*			
+			var p1=new Person();
+//			console.log( p1.say() );
+			console.log(Person.prototype.constructor);
+			for( var i in p1 ){
+				console.log( p1[i] );
+			};*/
+			
+			
+			//原型的动态特性
+			
+			function Person(){
+				
+			}
+		
+			//原型对象的构造器  默认为Person.
+			Person.prototype.say=function(){ alert(111) };
+			
+			var p1=new Person();
+			p1.say();
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			
+		//原型对象:  原型对象里的所有属性和方法  被所有构造函数实例化出来的对象所共享.	
+//		只要修改了，就会影响其它的实例	
+/*		function Person(){};
+		Person.prototype={
+			name: 'ting',
+			age: 22,
+			finds: ['ling','ryo'],
+			say: function(){
+				alert(this.name);
+			}
+		}
+		
+		var p1=new Person();
+		var p2=new Person();
+		
+		p1.finds.push('mlln');  //改变p1的属性 就影响其它实例的属性.
+		
+		console.log( p1 );
+		console.log( p2 );*/
+		
+		
+		//组合使用  原型式和构造函数式  (定义一个类) 开发时常用的.
+		
+/*		function Person( name,age,finds ){
+			this.name=name;
+			this.age=age;
+			this.finds=finds;
+		}
+		
+		Person.prototype={
+			constructor: Person,
+			say: function(){
+				this.name;
+			},
+			job: 'lin'
+		}
+		
+		var p1=new Person( 'ting',22,['ryo','mlln'] );
+		var p2=new Person('xixi',24,['annicool','snow']);
+		
+		console.log( p1 );
+		console.log( p2 );
+		*/
+		
+		//动态原型模式  (特点 让你的代码  都封装到一起)
+/*		function Person( name,age,finds ){
+			this.name=name;
+			this.age=age;
+			this.finds=finds;
+			
+			//动态原型方法:
+			if( typeof this.say != 'function' ){
+				Person.prototype={
+					constructor: Person,
+					say: function(){
+						alert( this.name );
+					}
+				}
+			};
+			
+		}		*/
+		
+		
+		//稳妥构造函数式   durable Object (稳妥对象)  --非常安全的环境中.   核心函数非常重要. 程序安全性要求很高.
+		
+		//没有公共属性 
+		//方法不能使用this关键字.
+		
+		function Person( name,age,job ){
+			//创建一个要返回的对象.
+			var obj=new Object();
+			
+			//可以定义私有的变量和函数 
+			var sex='nan';
+			
+			var saySex=function(){
+				//...
+			}
+			
+			//添加一个对外的一个方法
+			obj.sayName=function(){
+				alert(name);
+			}
+			return obj;
+		}
+		
+		var p1=new Person('ting');
+		alert( p1.name ); //undefeind
+		p1.sayName();  //ting
+		
+		
+		
+		
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

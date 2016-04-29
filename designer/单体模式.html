@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<script type="text/javascript">
+			
+			
+			/*//单体模式  (singleton)
+			//1,简单单体模式  -- 只能创建一个实例， 把所有代码和数据组织到一个地方.    全局的资源，公共的数据， 组织到一起.统一的管理.
+			//单体模式 一般不采用new 关键字.  已经存在了对象.
+			var Singleton={
+				attr1: true,
+				attr2: 10,
+				method1: function(){
+					alert(this.attr1);
+				},
+				method2: function(){
+					alert('方法2');
+				}
+			};
+			
+			// 补充
+			//主要用来 划分命名空间(区分代码，降低耦合性) Ext.Manager.attr1 
+			var mlln={};
+			mlln.Singleton={
+				attr1: true,
+				attr2: 10,
+				method1: function(){
+					alert(this.attr1);
+				},
+				method2: function(){
+					alert('方法2');
+				}
+			}
+			console.log( mlln.Singleton.method1() );*/
+			
+			//2,借用闭包创建单体  闭包主要的目的:就是保护数据，不受外界所干扰.
+			//命名空间
+			var mlln={};
+			mlln.Slington=(function(){
+				// 可以添加私有成员
+				var a1=false;
+				var a2=23;
+				var fn1=function(){
+					console.log( this );
+					alert( this );
+				};
+				//把块级作用域里的执行结果赋值给单体对象.
+				return {
+					attr1: true,
+					attr2: 10,
+					method1: function(){
+						return fn1;
+					},
+					method2: function(){
+						alert('方法2');
+					}
+				};
+			})();
+//			console.log( mlln.Slington['method1']()() );
+			alert( mlln.Slington.attr1 );
+//			(function test(){ alert(123) })();//块级作用域
+			
+			
+			
+		</script>
+		
+	</head>
+	<body>
+	</body>
+</html>

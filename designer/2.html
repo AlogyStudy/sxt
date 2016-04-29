@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<script type="text/javascript">
+			
+			//javascript 定义接口有三种方式
+			
+			//2 属性检测的方式.  判断接口是否存在
+				/*
+				 * interface Composite {
+				 * 		function add(obj);
+				 * 		function remove(obj);
+				 * 	    function undate(obj);
+				 * }
+				 * interface FormItem {
+				 * 		funciton select(obj);
+				 * }
+				 * */
+				//CompsiteImp1 implemente Compsite ,FormItem
+				var CompositeImpl=function(){  //在类的内部 会显示的把要实现的借口都接收到.//显示的在类的内部  接受所实现的借口.
+					// 一般来说  我们(项目经理)， ：在类的内部定义一个变量(名字要固定). -- 按名字去判断.  -- 是一个规范.
+					this.implementsInterfaces=['Compsite','FormItem']; //接受所实现接口的名字.
+				}
+//				var CompositeImpl2=function(){}
+				CompositeImpl.prototype.add=function( obj ){ alert('add-'); }
+				CompositeImpl.prototype.remove=function( obj ){}
+				CompositeImpl.prototype.undate=function( obj ){}
+				CompositeImpl.prototype.select=function( obj ){}
+				function CheckCompsiteImp1( instance ){  //检测CompositeImpl类的对象  //instance --传入实例化对象.
+					//专门检测类 是否实现.    //判断当前对象是否实现了所有接口.
+					if( !IsImplements(instance,'Compsite','FormItem') ){  //在写一个方法 来判断  是否实现接口，方便解耦.   //如果没有实现接口 抛出异常
+						throw new Error('Object does not implement a required interface!');  //这个实例对象没有继承  
+					};
+				}
+				// 公用的具体的检测方法(核心方法)  返回值 就是 boolean
+				function IsImplements( obj ){ // 目的：就是判断实例对象有没有实现相关的借口 .
+					//arguments 对象  获得对象的实际参数
+					for( var i=1; i<arguments.length; ++i ){  //直接把 传入的实例化对象  不循环
+						//接受所实现每一个接口的名字
+						var interfaceName=arguments[i];
+						//判断此方法是成功还是失败
+						var interfaceFound=false;
+						for( var j=0; j<obj.implementsInterfaces.length; ++j ){
+							if( obj.implementsInterfaces[j] == interfaceName ){
+								interfaceFound=true;
+								break;
+							};
+						};
+						if( !interfaceFound ){
+							return false;
+						};
+					};
+					return true;
+				}	
+			
+				var b1=new CompositeImpl();
+				CheckCompsiteImp1(b1);
+				b1.add();
+				
+			//3 鸭式辨型 的方式.
+			
+		</script>
+		
+	</head>
+	<body>
+	</body>
+</html>

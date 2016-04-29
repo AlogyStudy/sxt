@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			
+			//原型继承
+			
+/*			function Person( name ){
+				this.name=name;
+				this.say=function(){
+					alert(this.name);
+				}
+			}
+			Person.prototype.id=21;
+			function Son( age ){
+				this.age=age;
+			}
+			
+			Son.prototype=new Person('ting');
+			var b=new Son(12);
+			
+			console.log( b );
+			//原型继承的特点 ，即继承了父类的模板，又继承了父类的原型对象.
+			*/
+
+
+			//类继承 (借用构造函数的继承); 
+/*			function Person( name ){
+				this.name=name;
+				this.say=function(){
+					alert(this.name);
+				}
+			}
+			Person.prototype.id=21;
+			function Son( name,age ){
+				
+				Person.call(this,name); //类继承/原型冒充
+				
+//				this.extend=Person;
+//				this.extend.call(this,name);
+				
+				this.age=age;
+				
+//				delete this.extend;
+
+			}
+			
+			var b2=new Son('ting',23);
+			console.log( b2 );
+			console.log( b2.id ); //undfined //只继承模板，不继承原型.
+*/			
+	
+	
+	
+/*			//混合继承  (原型继承+原型冒充/借用构造函数继承)
+			function Person( name ){
+				this.name=name;
+				this.say=function(){
+					alert(this.name);
+				}
+			}
+			Person.prototype.id=21;
+			Person.prototype.say=function(){
+				alert(this.name);
+			}
+			function Son( name,age ){
+				Person.call(this,name); //类继承/原型冒充
+				this.age=age;
+			}
+			
+			//原型继承   只剩下父类的实例 和 父类的原型对象的关系.
+			Son.prototype=new Person();  //继承父类的 原型对象.	
+			
+			var b3=new Son('ting',23);
+			
+			console.log( b3 );*/
+			
+			//复制继承.
+			Object.prototype.extend=function( obj ){
+				try{
+					if( obj && obj.constructor == Object ){
+						for( var i in obj ){
+							if( obj.hasOwnProperty(i) ){ //传入进来的函数 是自身上的属性才继承.
+								if( this[i]== undefined ){ //判断原来的 是否有属性.
+									this[i]=obj[i];
+								};
+							};
+						}
+					};
+				}catch(e){
+					//TODO handle the exception
+					console.log('error');
+				}		
+				return this;
+			};
+			var kitty={
+				'name': 'kitty',
+				'age': 22
+			};
+			var cat={
+				'name': 'miao',
+				'say': function(){ alert(this.name); }
+			};
+			
+			function Person( fanxia ){
+				this.fanxia=fanxia;
+			}
+			
+			var p1=new Person('zou');			
+//			cat.extend(kitty);
+			p1.extend( cat );
+			console.log( cat );
+			console.log( p1 );
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+
+		//原型  prototype
+		
+		//构造函数模式
+/*		function Person( name,age ){
+			
+			this.name=name;
+			this.age=age;
+		//	this.sayName=function(){ alert(this.name); };
+			this.sayName=sayName;
+			
+		}
+		
+		//定义一个函数	
+		function sayName(){
+			alert( this.name );
+		};
+		
+		
+		var p1=Person('ling',22);
+		var p2=person('ting',23);
+		
+		alert( p1.name == p2.name );*/
+		
+		
+		
+		//  prototype  创建每一个函数的时候 都有prototype属性. ,这个属性  其实是一个指针，而这个指针总是指向一个对象. 
+		//  这个对象 的用途就是 将特定的属性和方法	包含在内 。 起到一个所有实例 所共享的作用.    原型对象.
+		
+		function Person(){
+			
+		}
+		
+		console.log( Person.prototype );
+		Person.prototype.show=function(){
+			
+		}
+		
+		//构造函数   原型对象  实例对象
+		//构造函数.prototype==原型对象.
+		//原型对象.constructor==构造函数
+		
+		//实例对象.prototype == 原型对象.
+		
+		//isPrototypeOf();  //判断是否 一个对象的 原型 
+		
+		
+		
+		
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

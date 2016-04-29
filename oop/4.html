@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			//ECMA5 forEach  循环遍历数组的每一项 (适合遍历一维数组)
+			
+			var arr=[
+				1,
+				[2,3,4],
+				[
+					['xixi',['haha']]
+				]
+			];
+			
+/*			arr.forEach(function( item,index,array ){
+				
+				//console.log( item,index,array );
+				console.log( item );
+
+			x	})*/
+			
+			Array.prototype.each=function( fn ){
+				
+				try{
+					
+					//1 目的 ，遍历数组的每一项.
+					this.i || (this.i=0); //计数器  记录当前遍历的元素的位置.   //var i=0;   在底层  使用  this.
+					
+					//2 严谨的判断 ，什么时候去走each 核心方法.
+					if( this.length > 0 && fn.constructor == Function ){  //当数组的函数  大于0 并且传递的参数 必须是为函数.
+						
+						//循环遍历数组的每一项.
+						
+/*						for( var i in this ){   //能不用forIn循环就不用forIn循环.
+							
+						};*/
+						
+						// while 循环的范围
+						while ( this.i<this.length ){
+							//核心代码.
+							
+							//获取数组的每一项.
+							var e=this[this.i];
+							//如果当前元素获取到了，并且当前元素是一个数组.
+							if( e && e.constructor == Array ){
+								//直接做递归操作.
+								e.each(fn);
+							} else {
+								//如果不是数组.  单个元素.
+//								fn.apply(null,[e]);
+
+/*								var obj=true;
+								fn.apply(obj,[e]);*/
+								
+								fn.apply(e,[e]);  //这儿的目的就是为了把数组当前元素传递给fn函数， 并函数执行.
+								//fn.call(e,e);
+							}
+							this.i++;
+						};
+						this.i=null;  //释放内存， GC回收机制回收变量
+					}
+				}catch(e){
+					//TODO handle the exception
+					console.error('error');					
+				}
+				return this;
+			}
+			
+			arr.each(function( item ){
+				console.log( item );
+			});
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

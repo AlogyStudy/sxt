@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			
+/*			//原型继承
+			function Person( name,age ){
+				this.name=name;
+				this.age=age;
+			}
+			
+			Person.prototype.id=32;
+			
+			function Boy( sex ){
+				this.sex=sex;
+			}
+			
+			
+			//原型继承  特点：即继承了父类的模板，又继承了  父类的原型对象
+			
+			Boy.prototype=new Person();
+			
+			var b=new Boy(12);
+			
+			console.log( b );*/
+			
+			
+			
+/*			//类继承 (只继承模板) 不继承原型(属性是直接属于对象本身)   原型冒充
+			function Cat( color ){
+				this.color=color;
+				this.say=function(){
+					alert(this.color);
+				}
+			}
+			
+			var a=Cat;
+			
+			function Boy(){
+				this.extend=Cat;
+				this.extend.apply(this,arguments);
+				delete this.extend;
+			}
+			
+			var b=new Boy( 'tan' );
+			console.log( b );
+			
+			
+			function Person( name,age ){
+				this.name=name;
+				this.age=age;
+			}
+			
+			Person.prototype.id=10;
+			
+			function Boy( name,age,sex ){
+				
+				Person.call(this,name,age);
+				
+				this.sex=sex;
+			}
+			
+			var boy=new Boy( 'mlln',23,'nan' );
+			
+			console.log( boy );
+			alert( boy.id );  //undefined  //父类的原型对象并没有继承.*/
+			
+			
+			
+			//混合继承  -- 
+			
+			function Person( name,age ){
+				this.name=name;
+				this.age=age;
+			}
+			Person.prototype.id=23;
+			Person.prototype.sayName=function(){
+				alert( this.name );
+			}
+			function Boy( sex ){
+				Person.apply(this,arguments); //复制继承(类继承)
+				this.sex=arguments[arguments.length-1];
+			}
+			
+			//原型继承
+			//只剩下 父类的实例 和 父类的原型对象的关系.
+			Boy.prototype=new Person(); //继承父类的对象.
+			var b=new Boy( 'ting',23,'nv' );
+			console.log( b );
+			
+			
+			
+			
+			//  复制继承
+			Object.prototype.extend=function( obj ){
+				for( var i in obj ){
+					if( obj.hasOwnProperty(i) ){
+						if( this[i] == undefined ){
+							this[i]=obj[i];
+						}
+					}
+				}
+			}
+			
+			var kitty={
+				'color': 'tan',
+				'age': 2
+			};
+			
+			var cat={
+				'color': 'yellow and black'
+			}
+			
+			cat.extend(kitty);
+			console.log( cat );
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

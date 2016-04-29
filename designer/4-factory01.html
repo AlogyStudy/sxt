@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			
+			//搭建一个工厂的环境
+			
+			function CarShop(){ debugger; }
+			CarShop.prototype={
+				constructor: CarShop,
+				sellCar: function( type ){
+					debugger;
+					var car; //声明一个car 的变量. 需要返回.
+					switch ( type ){
+						case 'Benz':
+							car=new Benz();
+							break;
+						case 'Bmw':
+							car=new Bmw();
+							break;
+						case 'Audi':
+							car=new Audi();
+							break;
+						default:
+							'not buy it';
+							break;
+					}
+					//检验接口实现.
+					Ryo.Interface.ensureImplements(car,CarInterface);
+					return car;	
+				}
+			};
+			debugger;
+			//接口对象的实例.
+			var CarInterface=new Ryo.Interface('CarInterface',['start','run']);
+			
+			//Class benz bmw audi  (都是car);
+			function Benz(){ }
+			Benz.prototype.start=function(){ alert('Benz..start');debugger; }
+			Benz.prototype.run=function(){  alert( 'Benz..run' )};
+			function Bmw(){}
+			Bmw.prototype.start=function(){ alert('Bmw..start') }
+			Bmw.prototype.run=function(){  alert( 'Bmw..run' )};
+			function Audi(){}
+			Audi.prototype.start=function(){ alert('Audi..start') }
+			Audi.prototype.run=function(){  alert( 'Audi..run' )};
+			debugger;
+			var shop=new CarShop();
+			var car=shop.sellCar('Benz');
+			car.start();
+			car.run();
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

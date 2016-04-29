@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			//惰性单体(和闭包单体类似)
+			//顶层的命名空间
+			var mlln={};
+			mlln.Base=(function(){
+				//私有变量  控制返回单体对象.
+				var uniqIntance; //undefined   需不需要返回单体，或者返回那些单体.
+				//需要一个构造器 init初始化单体对象的方法
+				function init(){
+					//私有成员变量
+					var a1=10;
+					var a2=true;
+					var fn1=function(){ alert(this.a1); };
+					return {
+						attr: a1,
+						attr2: a2,
+						method: function(){
+							return fn1();
+						}
+					}
+				}
+				return {
+					getIntance: function(){
+						if( !uniqIntance ){ //如果不存在  创建单体实例
+							uniqIntance=init();
+						}
+						return uniqIntance;
+					}
+				}
+			})();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

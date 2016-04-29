@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			//观察者模式   -- 对程序中某一个对象进行实时的观察，当该对象状态发生改变的时候  ， 进行通知.
+			// 观察者， 被观察者.
+			//经典案例： 订报纸     (报社 [发布者] ， 订阅者)
+			
+			//被观察者。  发布者.
+			var Publish=function( name ){
+				debugger;
+				this.name=name;
+				this.subscribers=[];  // 接收   所有的订阅者  (每一个元素都是函数类型)
+			}
+			// Publish类的实例对象  去 发布消息 的方法. 
+			Publish.prototype.delivery=function( news ){
+				debugger;
+				var publish=this;
+				this.subscribers.forEach(function( fn ){
+					debugger;
+					fn(news,publish);  //把新消息发给一个订阅者.
+				});
+				return this;
+			}
+			
+			// 具体的一个 订阅者. 去  订阅报纸的方法.
+			Function.prototype.subscribe=function( publish ){
+				debugger;
+				var sub=this; //取得具体订阅者找个人.
+				//some 方法： 循环变量数组的每一个元素，执行一个函数，如果其中有一个返回true，那么整体就返回true
+				var alredyExists=publish.subscribers.some(function( item ){
+					if( item === sub ){
+						return true;
+					}
+					return false;
+				});
+				
+				//如果当前出版社不存在找个人， 则将其加入其中.
+				if( !alredyExists ){
+					publish.subscribers.push(this);
+				}
+				return this;
+			}
+			
+			// 具体的一个 订阅者. 去  取消订阅报纸的方法.
+			Function.prototype.unsubscribe=function( publish ){
+				debugger;
+				var sub=this; //取消订阅  报纸
+				//filter 过滤函数。 --循环变量数组的每一个元素，执行一个函数, 如果不匹配删除该元素.  //返回新数组.
+				publish.subscribers=publish.subscribers.filter(function( item ){
+					return item !== sub;
+				});
+				return this;
+			}
+			
+			
+			window.onload=function(){
+				
+				//实例化发布者对象(报社对象，被观察者)
+				var pub1=new Publish('第一报社');
+				var pub2=new Publish('第二报社');
+				var pub3=new Publish('第三报社');
+				
+				//观察者， 订阅者.
+				var sub1=function( news ){
+					debugger;
+					document.getElementById("sub1").innerHTML+=arguments[1].name+':'+news+'\n';
+				};
+				var sub2=function( news ){
+					debugger;
+					document.getElementById("sub2").innerHTML+=arguments[1].name+':'+news+'\n';
+				}
+				
+				
+				//执行订阅方法.
+				sub1.subscribe(pub1).subscribe(pub2);
+				sub2.subscribe(pub1).subscribe(pub3);
+				
+				//事件绑定
+				Ryo.EventUtil.addHandler(document.getElementById("pub1"),'click',function(){
+					pub1.delivery(document.getElementById("text1").value);
+				});
+
+				Ryo.EventUtil.addHandler(document.getElementById("pub2"),'click',function(){
+					pub2.delivery(document.getElementById("text2").value);
+				});
+
+				Ryo.EventUtil.addHandler(document.getElementById("pub3"),'click',function(){
+					pub3.delivery(document.getElementById("text3").value);
+				});
+				
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+	
+		<input type="button" name="" id="pub1" value="第一报社" /><input type="text" name="" id="text1" value="" /><br />
+		<input type="button" name="" id="pub2" value="第二报社" /><input type="text" name="" id="text2" value="" /><br />
+		<input type="button" name="" id="pub3" value="第三报社" /><input type="text" name="" id="text3" value="" /><br />
+		
+		<textarea name="" id="sub1" rows="30" cols="40"></textarea>
+		<textarea name="" id="sub2" rows="30" cols="40"></textarea>
+	
+	</body>
+	
+</html>

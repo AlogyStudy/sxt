@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			//装饰者模式   -- 就是在保证不改变 原有对象的基础上， 去扩展一些想要的方法或需求.
+			// 实现同样的接口
+			// 需要有子类
+			
+			var CarInterface=new Ryo.Interface('CarInterface',['getPrice','assemble']);
+			var Car=function( car ){
+				//就是为了让子类继承.(让子类  多一个父类的引用)
+				this.car=car;
+				//检测接口.
+				Ryo.Interface.ensureImplements(this,CarInterface);
+			}
+			Car.prototype={
+				constructor: Car,
+				getPrice: function(){
+					return 200000;
+				},
+				assemble: function(){
+					document.write("组装car");
+				}
+			}
+			
+			// 新的需求 --light,icebox,....
+			var LightDectorator=function( car ){  //原始对象.
+				//借用构造函数继承
+//				console.log(LightDectorator.superClass.constructor); //Car
+				LightDectorator.superClass.constructor.call(this,car);
+			}
+			Ryo.extend(LightDectorator,Car); //原型继承
+			LightDectorator.prototype={
+				constructor: LightDectorator,
+				getPrice: function(){
+					return this.car.getPrice()+10000;  //父类的 方法    扩展.
+				},
+				assemble: function(){
+					document.write("车灯...");
+				}
+			}
+			
+			
+			var IceboxDecorator=function( car ){
+				IceboxDecorator.superClass.constructor.call(this,car);
+			}
+			Ryo.extend(IceboxDecorator,Car);
+			IceboxDecorator.prototype={
+				constructor: IceboxDecorator,
+				getPrice: function(){
+					return this.car.getPrice()+23000;  //父类的 方法    扩展.
+				},
+				assemble: function(){
+					document.write("冰箱...");
+				}				
+			}
+			
+			
+			var car=new Car();
+			console.log( car.getPrice() );
+			car.assemble();
+
+			
+			car=new LightDectorator(car);
+			console.log( car.getPrice() );
+			car.assemble();
+
+			
+			car=new IceboxDecorator(car);
+			console.log( car.getPrice() );
+			car.assemble();
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

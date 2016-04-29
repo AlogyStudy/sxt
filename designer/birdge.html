@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			//桥接模式 : 主要作用把抽象和实现 分离开来,使他们可以完全独立变化.
+			
+			//应用场景: 事件监听回调机制
+			//用户点击一个按钮，向服务器端发送信息.
+			
+			//当页面加载完  window.onload;
+			//传统  事件监听回调机制.
+/*			$(function(){
+				
+				//1,前台业务逻辑
+				var oBtn=document.getElementById("btn");
+				//用事件注册的方式，在元素上添加 事件.
+				Ryo.EventUtil.addHandler(oBtn,'click',sendReq);
+				
+				//--------------------------------------------
+				//2,后台业务逻辑
+				//处理后台的函数  
+				function sendReq(){
+					//ajax
+					alert('数据:'+this.value);
+					//$.post('Url',{msg:this.value},function( data ){
+						//CallBack...
+					//});
+				}
+				
+			});*/
+			
+			
+			//利用桥接 模式 ，分开两个业务逻辑单元.
+			$(function(){
+				
+				//1,前台业务逻辑   : 这一段代码处理前台的事件注册和绑定的.
+				var oBtn=document.getElementById("btn");
+				//用事件注册的方式，在元素上添加 事件.
+				Ryo.EventUtil.addHandler(oBtn,'click',bridgeHadler);
+				
+				//--------------------------------------------
+				
+				// 利用桥接模式分开.
+				function bridgeHadler(){  
+					sendReq( this.value );
+				}
+				
+				//2,后台业务逻辑 : 这段代码是处理后台发送请求的.
+				//处理后台的函数    //单元测试的时候  可以直接 调用sendReq();
+				function sendReq( msg ){
+					//ajax
+					alert('数据:'+msg);
+/*					$.post('Url',{msg:this.value},function( data ){
+						//CallBack...
+					});*/
+				}
+				
+			});
+			
+		</script>
+		
+	</head>
+	<body>
+		
+		<input type="button" name="" id="btn" value="我是数据.." />
+		
+	</body>
+</html>

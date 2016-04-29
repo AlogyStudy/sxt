@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			
+			//命令模式  是一种封装方法调用的方式
+			//命令模式的目的：  把调用命令的调用者   和   执行者的接受者  减低耦合
+			//要执行一件事情: 1(命令1)   2(命令2)   3(命令3)
+			//命令模式  必须实现接口.(execute)  -- 把命令实例化出来， 调用 execute方法.
+			
+			//命令模式-- 简单命令模式 ， 复杂命令模式 (事物) ，闭包命令模式(更加灵活的调用命令);
+			var CommandInterface=new Ryo.Interface('CommandInterface',['execute']);
+			//有一个按钮  点击 按钮  触发几个元素去执行一些动画效果 .
+			//2个命令 (1:statr) (2:stop)
+			//命令模式 的主要概念. : 调用者只需要执行相应的命令    不需要关心命令是怎么执行的.
+							// 执行者，才真正的去执行这痛啊命令的内部规范.
+							
+//			简单命令模式				
+			var StatrCommand=function( obj ){
+				this.ad=obj;
+			}
+			StatrCommand.prototype.execute=function(){
+				this.ad.start();
+			}
+			var StopCommand=function( obj ){
+				this.ad=obj;
+			}
+			StopCommand.prototype.execute=function(){
+				this.ad.stop();
+			}
+			var startCommand=new StatrCommand( obj );
+			startCommand.execute();
+			var stopCommand=new StopCommand( obj );
+			stopCommand.execute();
+			
+			//闭包命令模式
+			var MarkStart=function( obj ){
+				return function(){
+					obj.statrt();
+				}
+			}
+			var MarkStop=function( obj ){
+				return function(){
+					obj.stop();
+				}
+			}
+			var startCommandB=new MarkStart(obj);
+			startCommandB();  //命令开启.
+			var stopCommandB=new MarkStop(obj);
+			stopCommandB();  //命令结束.
+			
+			//客户 ，调用者  ， 接受者.
+			//客户创建命令() ， 调用这个执行命令(命令的实例)， 接受者在命令执行时进行相应的操作.()
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

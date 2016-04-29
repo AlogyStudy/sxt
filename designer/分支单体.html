@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			// 分支单体  (判读程序的分支 --> 浏览器差异检测)
+			
+			var Mlln={};
+			var def=true;
+			Mlln.More=(function(){
+				var objA={ //火狐浏览器  内部的一些配置
+					attr1: 'ff attr1',
+					//属性1
+					//属性2
+					//方法1
+					//方法2
+				};
+				var objB={  //ie浏览器 内部的一些配置
+					attr1: 'ie attr1',
+					//属性1
+					//属性2
+					//方法1
+					//方法2
+				};
+				return (def) ? objA: objB;
+			})();
+			
+			alert( Mlln.More.attr1 );
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		
+			//享元模式  : 优化的设计模式  -- (优化：时间[代码的运行时间]，空间[web浏览器的内存])
+			
+			//享元模式  ，目的优化程序  --- 内在数据  static(出厂商  , 型号 ,  出厂日期  )，外在数据. (拥有着， 车牌号, 登记日期);
+			//  出厂商  , 型号 ,  出厂日期  , 拥有着， 车牌号, 登记日期.    内部数据  划分成两个地方.
+			var Car=function( make,mode,year ){
+				this.make=make;
+				this.mode=mode;
+				this.year=year;
+			}
+			Car.prototype={
+				constructor: Car,
+				getMake: function(){
+					return this.make;
+				},
+				getMode: function(){
+					return this.mode;
+				},
+				getYear: function(){
+					return this.year;
+				}
+			}
+			
+			//工厂模式(闭包工厂)
+			var CarFactory=(function(){
+				//内部的私有变量.   用于承装已经实例化好的Car
+				var createdCars={};
+				return {
+					createCar: function( mark,mode,year ){  //已经固定的静态数据创建一辆车.
+						//如果createdCars对象里已经存在当前的 mark,model,year.
+						if(createdCars[mark+mode+year]){
+							return createdCars[mark+mode+year];
+						} else {
+							var car=new Car(mark,mode,year);
+							createdCars[mark+mode+year]=car;
+							return car;
+						}
+					}
+				}
+			})();
+			
+			//单体模式 (外在的数据，和内在的数据结合在一起)
+			var CarRecordManager=(function(){
+				//把登记好的 汽车放入这个对象.
+				var carReocrdDataBase={};
+				return {
+					addCarRecord: function( mark,mode,year,owner,tag,renewDate ){
+						var car=CarFactory.createCar(mark,mode,year);
+						carReocrdDataBase[tag]={  //对象 有key和val 。 建立key ，选择 数据变化，但不会相同. 唯一标识
+							owner: owner,
+							renewDate: renewDate,
+							car: car
+						}
+					},
+					renewRagistration: function( tag,newRenewDate ){
+						carReocrdDataBase[tag].renewDate=newRenewDate;						
+					}
+				}
+			})();
+			
+			var arr=[];
+			console.time('ryo');
+			for( var i=0; i<500000; ++i ){
+//				arr.push( new Car('大众','01010','2015','ting','201314','2016') );
+				//享元模式的测试
+				arr.push(CarRecordManager.addCarRecord('大众','01010','2015','ting','201314','2016'));
+			
+			};
+			console.timeEnd('ryo');
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

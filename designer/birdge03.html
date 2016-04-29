@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			//桥接模式 ： 用桥把多个 单元组织在一起
+			//使每个单元都能够独立化. 可以实现自己的变化
+			var Class1=function( a,b,c ){  //可以进行独立的代码编程
+				this.a=a;
+				this.b=b;
+				this.c=c;
+			}
+			
+			var Class2=function( d,e ){ //可以进行独立的代码编程
+				this.d=d;
+				thid.e=e;
+			}
+			
+			var BridgeClass=function( a,b,c,d,e ){  
+			//通过一个'桥'连接起来.  //两段代码可以 独立起来. 做一些单元测试， 测试性的操作，可以独立运行，不产生耦合性
+				
+				this.class1=new Class1(a,b,c);
+				this.class2=new Class2(d,e);
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

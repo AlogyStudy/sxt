@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+		
+		
+			function extend( son,person ){
+				//目的: 实现只继承父类的原型对象 .
+				//person.prototype
+				//1,用一个空函数作为中转.
+				var F=new Function(); //创建一个空个函数.  //目的进行中转 (  )
+				//2,实现空函数和超类的原型对象转换.
+				F.prototype=person.prototype;  
+				//3,原型继承.
+				son.prototype=new F();  //模板为空，只有父类的原型.
+				//4,还原子类的构造器.
+				son.prototype.constructor=son;  
+				//5,保存 一下父类的原型对象 ，  因为: 一方面方便解耦， 另一方面 方便获得父类的原型对象.
+				son.superClass=person.prototype;  //自定义一个子类的静态属性. 接受父类的原型对象.
+				//判断父类的原型对象 ， 加保险.
+				if( person.prototype.constructor == Object.prototype.constructor ){
+					person.prototype.constructor=person; //手动还原父类的原型构造器.
+				};
+			};
+		
+			//混合继承 : 原型继承 和借用构造函数继承(冒泡继承)
+			//3 件事 ，继承了二次的父类的模板，继承了一次原型对象.    缺点继承两次的父类模板.			
+			function Person( name,age ){
+				this.name=name;
+				this.age=age;
+			}
+			Person.prototype={
+//				constructor: Person,
+				'tan': 'pink',
+				sayHello: function(){
+					alert(this.tan);
+				}
+			};
+			function Son(){
+/*				this.extend=Person;
+				this.extend.apply(this,arguments);*/
+				Son.superClass.constructor.apply(this,arguments);
+				this.say=function(){
+					alert(123);
+				}
+				delete this.extend;
+			}
+			Son.prototype.sayHello=function(){
+				alert('hello js');
+			}
+			
+//			Son.prototype=new Person();
+			//继承 就 2件事儿， 继承一次父类的模板 ， 继承一次原型对象.
+//			只要使 父类模板继承一次
+			//extend( 子类,父类 );
+			extend(Son,Person);	
+			
+			var boy1=new Son('ting',22);
+			console.log(boy1);
+//			boy1.sayHello();
+			Son.superClass.sayHello.call(boy1);  //子类中有父类的方法，会覆盖，想调用父类中的方法原型对象.sayHello.call();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

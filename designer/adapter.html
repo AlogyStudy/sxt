@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			//适配器 : 日常生活中-->PS2 接口  (圆口)
+				// 新电脑：usb  <--  PS2-to-usb(进行中转)   -->  鼠标键盘 都是圆口，  新电脑是usb.
+			
+			//程序中: 简单的适配器
+			
+/*			var obj={  //以前的鼠标键盘 (圆口)
+				str: 111,
+				str2: 222,
+				str3: 333,
+			}
+			
+			//适配器的方法.
+			function adapter( obj ){
+				interfaceMethod(obj.str,obj.str2,obj.str3);
+			}
+			//新电脑. usb
+			function interfaceMethod( x,y,z ){
+				
+			}*/
+			
+			
+			//企业开发中，javascript 库， extJs jquery  YUI Prototype ded...
+			// YAHOO--YUI
+			//Prototype
+			
+			//YAHOO(我们用雅虎的框架，但是prototype程序该怎么写代码，还是怎么写)  -- 适配 js库
+			
+			//模拟 ：根据id获得指定的dom元素.
+			// protptype $ function (不需要传递任何形式参数 : 一个id， 写一个参数， 多个id 多个参数  )
+			function $(){
+				var elements=[];
+				for( var i=0; i<arguments.length; ++i ){
+					var eles=arguments[i];
+					if( typeof eles === 'string' )
+						eles=document.getElementById(eles);
+					if( arguments.length == 1 ){
+						return eles;
+					};
+					elements.push(eles);
+				};
+				return elements;
+			}
+			
+			
+			//YUI get function (传递一个参数 -- 类型不是字符串，就是数组)
+			var YAHOO={};
+//			YAHOO.util.dom.get=function(){};
+			YAHOO.get=function( el ){
+				
+				if( typeof el == 'string' ){
+					return document.getElementById(el);
+				}
+				if( el instanceof Array ){
+					var elesArr=[];
+					for( var i=0; i<el.length; ++i ){
+						elesArr[elesArr.length]=YAHOO.get(el[i]);
+					}
+					return 	elesArr;
+				}
+				if(el){
+					return el;
+				} 
+				return null;
+			}
+			
+			YAHOO.get=YUIToProAdaper;
+			function YUIToProAdaper(){  //适配器.  接口和类的适配
+				//对于YUI开发人员  永远是传递一个参数.
+				if( arguments.length == 1 ){
+					var e=arguments[0];
+//					return YAHOO.get(arguments[0]);  //方法已经重写.  调用报错
+					return $.apply(window,e instanceof Array ? e : [e] );
+				} else { 
+					return $.apply(window,arguments);  //一般绑定到window上.
+				};
+				
+			}
+			
+			
+			window.onload=function(){
+				//prototype 开发人员习惯的写法.
+/*				var domArray=$('box1','box2');
+				console.dirxml( domArray );
+				
+				//YUI  开发人员的习惯写法.
+				var domArr=YAHOO.get(['box1','box2']);
+				console.dirxml(domArr);*/
+				
+				// YUI  是一个	prototype程序员， 用项目经理的说法写程序.
+				
+				var i=YAHOO.get('box1','box2');
+				console.dirxml(i);
+				
+				var yuiI=YAHOO.get('box1');
+				console.log( yuiI );
+				
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+	
+		<div id="box1"></div>
+		<div id="box2"></div>
+	
+	</body>
+</html>

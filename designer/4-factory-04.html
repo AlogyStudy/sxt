@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			//细粒度 (更精确的过滤)  和 粗粒度(大概的过滤);
+			
+			//	万事万物皆对象  	
+			//你要卖什么车? 去什么商店   --> 商店  --> 卖车 --> 生产车 --> Factory;
+			
+			//搭建一个工厂的环境
+			//卖车 的商店  可能有 奥迪4s店，奔驰4s店，宝马4s店.
+			
+			//Super Shop  卖车
+			//abstract Class   --> PHP中抽象类 ();
+			/*this CarShop is a abstract*/ 
+			function CarShop(){   }
+			CarShop.prototype={   //抽象类的 概念.  没有被实现  抛出异常.
+				constructor: CarShop,
+				sellCar: function( type ){
+					this.abstractSellCar(type);
+				},
+				abstractSellCar: function(){
+					throw new Error('this method is abstract ...');
+				}
+			};
+			
+			// Benz 4s
+			function BenzCarShop(){  }
+			Ryo.extend(BenzCarShop,CarShop);
+			BenzCarShop.prototype={
+				constructor: BenzCarShop,
+				sellCar: function( type ){
+					var car; 
+					var types=['Benz'];  //所有奔驰类型的汽车.
+					for( var iCar in types ){
+						//如果我的商店里有你想要的汽车的型号.
+						if( types[iCar] === type ){
+							car=CarFactory.creatCar(type);
+						} else {
+							console.log('not buy it...');
+						};
+					};
+					return car;
+				}
+			}
+			//bwm 4s
+			function BmwCarShop(){ }
+			Ryo.extend(BmwCarShop,CarShop);
+			BmwCarShop.prototype={
+				constructor: BmwCarShop,
+				sellCar: function( type ){
+					var car; 
+					var types=['Bmw'];  //所有宝马类型的汽车.
+					for( var iCar in types ){
+						//如果我的商店里有你想要的汽车的型号.
+						if( types[iCar] === type ){
+							car=CarFactory.creatCar(type);
+						} else {
+							console.log('not buy it...');
+						};
+					};
+					return car;
+				}
+			}
+			
+			//单体模式  //动态工厂模式.
+			var CarFactory={
+				creatCar: function( type ){
+					var car=eval('new '+type+'()');  //利用eval(); 动态创建传入实例对象.
+					//检验接口实现.
+					Ryo.Interface.ensureImplements(car,CarInterface);
+					return car;
+				}
+			};
+			
+			//接口对象的实例.
+			var CarInterface=new Ryo.Interface('CarInterface',['start','run']);
+			
+			//SupeClass  implements 
+			function BaseCar(){  }
+			BaseCar.prototype={
+				constructor: BaseCar,
+				start: function(){
+					alert(this.constructor.name+'..start');
+				},
+				run: function(){
+					alert(this.constructor.name+'..run');
+				}
+			}
+			//Class benz bmw audi  (都是车);
+			//注意关键问题，子类先继承父类，再扩展子类自己特有的方法.
+			function Benz(){ }
+			Ryo.extend(Benz,BaseCar);  
+			Benz.prototype.driveBenz=function(){
+				alert('driveBenz');
+			}
+			function Bmw(){}
+			Ryo.extend(Bmw,BaseCar);
+			
+			function Audi(){}
+			Ryo.extend(Audi,BaseCar);
+			
+			var shop1=new BenzCarShop();
+			var car1=shop1.sellCar('Benz');
+			car1.start();
+			car1.run();
+			var shop2=new BenzCarShop();
+			var car2=shop2.sellCar('Bmw');
+						
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

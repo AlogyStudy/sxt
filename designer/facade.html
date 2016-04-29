@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			//门面模式的概念：简化API接口    最经典的 就是事件.(例如：绑定事件)
+			
+			// 要调用2个函数 分别是   a,b
+			//只需要掉 公共的方法，并不需要知道内部如果了解.
+/*			
+			function a( x ){
+				//do something
+			}
+			
+			function b( y ){
+				//do something
+			}
+			
+			function ab( x,y ){
+				a(x);
+				b(y);
+			}*/
+			
+			
+			//  有一个需要:获得页面上的元素  给得到的元素设置css样式.
+			
+			// 需求发生变化， 同时设置多个元素css样式.
+			//简化代码-门面模式.
+			
+			window.onload=function(){
+				//给一个元素设置 一个样式.
+/*				var ele=document.getElementById("box");
+				
+				ele.style.background='tan';*/
+				//给多个元素设置多个样式.
+//				setStyle(['box1','box2','box3'],'background','tan');
+				
+				//给多个元素设置多个样式.
+				setCss(['box1','box2','box3'],{
+					'fontSize': 40+'px',
+					'background': 'pink',
+					'color': 'yellow'
+				});
+				
+			}
+			
+			
+			//简单的门面模式  -- 把一些 相同的代码抽取出来.
+			function  setStyle( elesId,prop,val ){
+/*				eles.each(function( item ){
+					item.style.prop=val;
+				});*/
+				for( var i=0; i<elesId.length; ++i ){
+//					document.getElementById(elesId[i]);
+//					console.log( document.getElementById(elesId[i]) );
+					document.getElementById(elesId[i]).style[prop]=val;
+					
+				};
+			}
+			//门面模式 的 css方法.
+			function setCss( elesId,options ){
+				for( var prop in options ){
+					if( !options.hasOwnProperty(prop) ) continue;
+					setStyle(elesId,prop,options[prop]);
+				};
+			}
+			
+		</script>
+		
+		
+	</head>
+	<body>
+		
+		<div id="box1">divdiv</div>
+		<div id="box2">divdiv</div>
+		<div id="box3">divdiv</div>
+		
+	</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="CommonUtil.js" type="text/javascript" charset="utf-8"></script>
+		
+		
+		<script type="text/javascript">
+			
+			//粗粒度， 大体上一个过滤
+			//细粒度， 精确.
+			//搭建一个  工厂环境   工厂模式特点:把一个类的任务，单独的使用一个细粒度的表示，建立出来.
+			
+			//工厂模式：各自任务，各自负责 
+			//万事万物皆对象. 
+			//去买车，去什么商店 --> 商店 --> 卖车 --> 生产车  --> Factory.
+
+			//父类 的 引用指向子类的对象.
+			
+			//复杂的工厂模式 ，细粒度化的工厂编程.
+			
+			//卖车的商店
+			//卖车的shop，有奥迪，宝马，奔驰
+			
+			//Super Shop --提供一个超级商店. 买车的方法.
+			//abstract Class == Java 抽象类.()  抽象类不能被实例化.  就是被子类去继承的.
+			/* this CarShop is a abstract class */
+			
+			function CarShop(){  }  //抽象类.
+			CarShop.prototype={
+				constructor: CarShop,
+				sellCar: function( type ){
+					//销售.  其它的方法.
+/*					var car=CarFactory.createCar(type);
+					return car;*/
+					this.abstractSellCar();   //方法没有实现，必须使用子类实现的方法那些对象--抽象类.
+				},
+				abstractSellCar: function(){
+					throw new Error('this method is abstract...');
+				}
+			};
+
+			//BenZ 店
+			function BenzCarShop(){  }
+			Ryo.extend(BenzCarShop,CarShop);
+			BenzCarShop.prototype={
+				constructor: BenzCarShop,
+				sellCar: function( type ){
+/*					var car=CarFactory.createCar(type);
+					return car;*/
+					var car; 
+					var types=['Benz']; //所有benz类型的汽车.
+					for( var t in types ){
+						if( types[t] === type ){  //匹配成功.
+							car=CarFactory.createCar(type);
+						} else {
+							console.error('not by it');
+						};
+					};
+					return car;
+				}
+			}
+			//Bwm 店
+			function BmwCarShop(){ }
+			Ryo.extend(BmwCarShop,CarShop);
+			BmwCarShop.prototype={
+				constructor: BmwCarShop,
+				sellCar: function( type ){
+					var car=CarFactory.createCar(type);
+					return car;
+				}
+			}
+			
+			//生产车的 工厂， 目的就是为了生产车.
+			//单体模式.
+			var CarFactory={
+				createCar: function( type ){
+					var car;
+					switch (type){
+						case 'Benz':
+							car=new Benz();
+						break;
+						case 'Bmw':
+							car=new Bmw();
+						break;
+						case 'Audi':
+							car=new Audi();
+						break;
+						default:
+							'not buy it';
+						break;
+					}
+					//检验接口实现.
+					Ryo.Interface.ensureImplements(car,CarInterface);
+					return car;
+				}
+			};
+			
+			//接口对象的实例.
+			var CarInterface=new Ryo.Interface(CarInterface,['start','run']);
+			
+			//SuperClass implements CarInterface
+			function BaseCar(){}
+			BaseCar.prototype={
+				constructor: BaseCar,
+				start: function(){
+					alert(this.constructor.name+'--start');
+				},
+				run: function(){
+					alert(this.constructor.name+'--run');
+				}
+			}
+			
+			//Class  benz  bmw audi
+			//  原型的动态特性.
+			//注意关键问题，子类先继承父类，子类再扩展自己特有的方法.
+			
+			function Benz(){}
+			Ryo.extend(Benz,BaseCar);//先写继承，然后在扩展子类的方法， 因为已经是从新覆盖.
+			
+			Benz.prototype.driveBenz=function(){ alert('Benz.driveBenz'); };
+			
+			function Bmw(){}
+			Ryo.extend(Bmw,BaseCar);
+			
+			function Audi(){}
+			Ryo.extend(Bmw,BaseCar);
+			
+			
+/*			var shop=new CarShop();
+			var car=shop.sellCar('Benz');
+			
+			car.start();
+			car.run();
+			car.driveBenz();
+			
+			var car2=shop.sellCar('Bmw');
+			car2.start();
+			car2.run();*/
+			
+			
+			
+			var shop1=new BenzCarShop();
+			var car1=shop1.sellCar('Benz');
+			car1.start();
+			car1.run();
+			
+			
+		</script>
+		
+	</head>
+	<body>
+	</body>
+</html>

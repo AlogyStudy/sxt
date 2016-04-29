@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+		Object.prototype.extend=function( sub,sup ){
+			try{
+				this.F=new Function();
+				this.F.prototype=sup.prototype;
+				sub.prototype=new this.F();
+				sub.prototype.constructor=sub;				
+				sub.supClass=sup.prototype;
+				if( sup.prototype.constructor == Object.prototype.constructor ){
+					sup.prototype.constructor=sup;
+				};
+			}catch(e){
+				//TODO handle the exception
+				console.log('error');
+			}
+			return this;
+		};
+		function Person( name,age ){
+			this.name=name;
+			this.age=age;
+		};
+		console.log( Person.prototype.constructor );
+		
+		console.log( Person.constructor );
+		
+//		console.log( Person instanceof 'function' );
+		Person.prototype={
+			'tan': 'pink',
+			sayColor: function(){
+				alert( 'hello world' );
+			}
+		};
+		
+		function Son(){
+			Son.supClass.constructor.apply(this,arguments);
+			this.tan='tan';
+		};
+		Son.prototype.id=10;
+		Son.prototype.sayColor=function(){
+			alert( 'hello javascript' );
+		};
+		
+		Son.extend( Son,Person );
+		var b=new Son('ting',32);
+		
+		b.sayColor();
+		console.log( b );
+		
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
