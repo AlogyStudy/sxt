@@ -1,0 +1,41 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'E:\\nodejs\\node.exe',
+1 verbose cli   'E:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'asdfasdfasdlkfjasdl;f' ]
+2 info using npm@2.14.3
+3 info using node@v4.1.0
+4 verbose install initial load of E:\wamp\www\github\sxt\nodejs\nodedemo02\package.json
+5 verbose installManyTop reading scoped package data from E:\wamp\www\github\sxt\nodejs\nodedemo02\node_modules\bar\package.json
+6 verbose installManyTop reading scoped package data from E:\wamp\www\github\sxt\nodejs\nodedemo02\node_modules\foo.js\package.json
+7 verbose installManyTop reading scoped package data from E:\wamp\www\github\sxt\nodejs\nodedemo02\node_modules\silly-datetime\package.json
+8 info package.json application-name@0.0.1 No description
+9 info package.json application-name@0.0.1 No repository field.
+10 info package.json application-name@0.0.1 No README data
+11 info package.json application-name@0.0.1 No license field.
+12 verbose readDependencies loading dependencies from E:\wamp\www\github\sxt\nodejs\nodedemo02\package.json
+13 silly cache add args [ 'asdfasdfasdlkfjasdl;f', null ]
+14 verbose cache add spec asdfasdfasdlkfjasdl;f
+15 silly cache add parsed spec Result {
+15 silly cache add   raw: 'asdfasdfasdlkfjasdl;f',
+15 silly cache add   scope: null,
+15 silly cache add   name: null,
+15 silly cache add   rawSpec: 'asdfasdfasdlkfjasdl;f',
+15 silly cache add   spec: 'E:\\wamp\\www\\github\\sxt\\nodejs\\nodedemo02\\asdfasdfasdlkfjasdl;f',
+15 silly cache add   type: 'local' }
+16 error addLocal Could not install E:\wamp\www\github\sxt\nodejs\nodedemo02\asdfasdfasdlkfjasdl;f
+17 verbose stack Error: ENOENT: no such file or directory, open 'E:\wamp\www\github\sxt\nodejs\nodedemo02\asdfasdfasdlkfjasdl;f'
+17 verbose stack     at Error (native)
+18 verbose cwd E:\wamp\www\github\sxt\nodejs\nodedemo02
+19 error Windows_NT 6.1.7601
+20 error argv "E:\\nodejs\\node.exe" "E:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "asdfasdfasdlkfjasdl;f"
+21 error node v4.1.0
+22 error npm  v2.14.3
+23 error path E:\wamp\www\github\sxt\nodejs\nodedemo02\asdfasdfasdlkfjasdl;f
+24 error code ENOENT
+25 error errno -4058
+26 error syscall open
+27 error enoent ENOENT: no such file or directory, open 'E:\wamp\www\github\sxt\nodejs\nodedemo02\asdfasdfasdlkfjasdl;f'
+27 error enoent This is most likely not a problem with npm itself
+27 error enoent and is related to npm not being able to find a file.
+28 verbose exit [ -4058, true ]
