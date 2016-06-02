@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<script type="text/javascript">
+			
+			var num = new Uint16Array(8);
+			
+			console.log( window.crypto.getRandomValues( num ) );
+			console.log( window.crypto.getRandomValues( num ) );
+			console.log( window.crypto.getRandomValues( num ) );
+			console.log( window.crypto.getRandomValues( num ) );
+			console.log( window.crypto.getRandomValues( num ) );
+			console.log( window.crypto.getRandomValues( num ) );
+			
+			console.log( '-------------' );
+			
+			var arr = new Uint32Array(10);
+			window.crypto.getRandomValues(arr);
+			
+			console.log( '幸运数为：' );
+			for( var i=0; i<arr.length; ++i ){
+				console.log( arr[i] );
+			}
+			
+			console.log( '--------------' );
+			
+			var num = Math.PI;
+			console.log(  num.toFixed() );
+			console.log( num.toPrecision() );
+			
+			
+		</script>
+		
+	</body>
+</html>

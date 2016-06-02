@@ -8,6 +8,11 @@ var server = http.createServer(function( req,res ){
     res.end();
 });
 
+http.createServer(function(){
+
+});
+
+
 //监听端口
 server.listen(9527,'127.0.0.1');
 

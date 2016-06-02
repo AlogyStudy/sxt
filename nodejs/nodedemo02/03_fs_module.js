@@ -8,7 +8,7 @@ var server = http.createServer(function( req,res ){
 
     if( req.url == '/favicon.ico' ) return false;
 
-    var pathName = url.parse( req.url).pathName;
+    var pathName = url.parse( req.url).pathname;
 
     //判断用户输入的地址是文件夹地址，还是文件地址
     //如果是文件夹地址，那么自动亲求这个文件夹中的index.html

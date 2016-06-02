@@ -7,7 +7,9 @@
 
 var sd = require('silly-datetime');
 
-var tt = sf.format( new Date(),'YYYY-MM-DD HH:mm' );
+var tt = sd.format( new Date(),'YYYYMMDD-HHmm' );
+
+console.log(tt);
 
 
 
