@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<h1>index页面</h1>
+		
+		信息内容：<input type="text" name="" id="info" value="" />
+		发送： <input type="button" name="" id="btn" value="发送" />
+		
+		<script src="/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			var socket = io();
+				
+			document.getElementById("btn").onclick = function (  ) {
+				
+				socket.emit('tiwen',document.getElementById("info").value);
+				
+			}
+			
+			socket.on('huida',function ( msg ) {
+				
+				console.log('回答：' +　msg);
+				
+			});
+			
+		</script>
+		
+	</body>
+</html>

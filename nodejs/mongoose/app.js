@@ -32,3 +32,4 @@ Student.xiugai({'name': 'xm'},{$set: {'age': 33}}, {},function ( err,reslut ) {
 	
 });
 
+ 
