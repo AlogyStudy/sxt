@@ -25,6 +25,17 @@
 			</p>
 			
 			<p>
+				选修课程：
+				
+				<% for( var i=0; i<quanbuKecheng.length; ++i ){%>
+					
+					<input type="checkbox" name="Kechengs" value="<%=quanbuKecheng[i].kid %>" /><%=quanbuKecheng[i].name %>
+				
+				<% } %>
+				
+			</p>
+			
+			<p>
 				<input type="submit" name="" id="" value="提交" />
 			</p>
 

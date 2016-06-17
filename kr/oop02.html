@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			//原型  prototype
+			
+			//构造函数方式
+			
+			function Person ( name,age ) {
+				
+				this.name = name;
+				this.age = age;
+				
+//				this.sayName = function () { alert(this.name); }
+				
+				this.sayName = sayName; //把 引用赋值到  类中。
+				
+			}
+			
+			//定义一个函数	 //  这个方法有缺陷，虽然是只实例化一次，提升性能，但 函数只能用于特定函数。 增加全局函数。
+			function sayName () {
+				
+				alert(this.name);
+				
+			}
+			
+			/*var p1 = new Person('z1',22);
+			var p2 = new Person('z2',24);
+			
+			p1.sayName();
+			p2.sayName();
+			
+			console.log( p1.sayName == p2.sayName ); //true
+			console.log( p1.name == p2.name );  //false*/
+			
+			
+			//定义到公共的地方 ， 就是 在 原型上.
+			//prototype  创建每一个函数的时候，都有一个prototype属性. 这个是属性，是一个指针。而这个对象总是指向一个对象。
+			//这个对象 的用途就是将特定的属性和方法包含在内，是一个实例对象， 起到了一个所有实例所共享的作用。
+			//屏蔽了，构造函数的缺点，new 一个对象，就把构造函数内的方法实例化一次。
+			
+			
+			function Person () {
+				
+			}
+			
+//			console.log( Person.prototype );
+			
+			var obj = Person.prototype;
+			
+//			console.log( obj.constructor );
+
+			obj.name = 'z3';
+			obj.age = 20;
+			obj.sayName = function () {
+				
+				console.log( this.name );
+				
+			}
+			
+			
+			var p1 = new Person();
+			var p2 = new Person();
+			
+			console.log( p1.age );
+			p1.sayName();
+			
+			
+			console.log( p1.sayName == p2.sayName );
+			
+			
+			
+			//构造函数   原型对象   实例对象
+			//构造函数.prototype = 原型对象
+			//原型对象.constructor = 构造函数
+			//实例对象.__proto__ = 原型对象
+			
+//			console.log( p1.__proto__ );
+
+				console.log( obj.isPrototypeOf(p1) ); //true
+				
+			
+		</script>
+		
+	</body>
+</html>

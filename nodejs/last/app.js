@@ -13,7 +13,7 @@ app.get('/',router.showIndex);
 
 app.get('/add',router.showAdd);
 
-app.get('/doadd',router.doadd)
+app.get('/doadd',router.doadd);
 
 app.get('/edit/:sid',router.edit);
 

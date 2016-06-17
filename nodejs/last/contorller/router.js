@@ -1,17 +1,17 @@
 
 var Student = require('../models/Student.js');
 
+var Kecheng = require('../models/Kecheng.js');
+
+/*Kecheng.create({'kid': 100, 'name': '美术课'});
+Kecheng.create({'kid': 101, 'name': '音乐课'});
+Kecheng.create({'kid': 102, 'name': '体育课'});
+*/
+
 exports.showIndex = function ( req,res,next ) {
 	
+	
 	Student.find({},function ( err,reslut ) {
-		
-		if ( err ) {
-			
-			res.send('出现错误');
-			
-			return ;
-			
-		}
 		
 		//渲染
 		res.render('index.ejs',{
@@ -39,10 +39,25 @@ exports.edit = function ( req,res,next ) {
 			return ;
 			
 		}
+		
+		Kecheng.find({},function ( err,reslut2 ) {
 			
-		res.render('edit.ejs',{
-			'student': reslut			
+			if ( err ) {
+				
+				res.send('查询错误');
+				
+				return ;
+				
+			}
+			
+			res.render('edit.ejs',{
+				'student': reslut,
+				'quanbuKecheng': reslut2 
+			});
+			
 		});
+		
+		
 		
 	});
 	
@@ -94,7 +109,25 @@ exports.remove = function ( req,res,next ) {
 
 exports.showAdd = function ( req,res,next ) {
 	
-	res.render('add.ejs');
+	//查询有多少种课程
+	Kecheng.find({},function ( err,reslut ) {
+	
+	console.log(reslut);
+	
+		if ( err ) {
+			
+			res.send('查询错误');
+			
+			return ;
+			
+		}
+		
+		res.render('add.ejs',{
+			'quanbuKecheng': reslut 
+		});
+		
+	});
+	
 	
 }
 
@@ -104,7 +137,12 @@ exports.doadd = function ( req,res,next ) {
 	//存储数据
 	Student.create(req.query,function ( err,reslut ) {
 		
-		res.send('插入成功');
+		//在课程中，添加此人。
+		Kecheng.tianjiaXueSheng(req.query.Kechengs,req.query.sid,function () {
+			
+			res.send('课程添加报名学生成功');
+			
+		});
 		
 	});
 	

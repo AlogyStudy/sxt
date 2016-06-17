@@ -7,7 +7,8 @@ var studentSchema = new mongoose.Schema({
 	'sid': Number,
 	'name': String,
 	'age': Number,
-	'sex': String
+	'sex': String,
+	'Kechengs': [Number]  //存放课程的kid
 });
 
 //建立索引

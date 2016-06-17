@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script src="Interface.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			
+			/**
+				extend method
+				@param 
+			 */
+			
+			function extend(son, person) {
+				//目的: 实现只继承父类的原型对象 .
+				//person.prototype
+				//1,用一个空函数作为中转.
+				var F = new Function(); //创建一个空个函数.  //目的进行中转 (  )
+				//2,实现空函数和超类的原型对象转换.
+				F.prototype = person.prototype;
+				//3,原型继承.
+				son.prototype = new F(); //模板为空，只有父类的原型.
+				//4,还原子类的构造器.
+				son.prototype.constructor = son;
+				//5,保存 一下父类的原型对象 ，  因为: 一方面方便解耦， 另一方面 方便获得父类的原型对象.
+				son.superClass = person.prototype; //自定义一个子类的静态属性. 接受父类的原型对象.
+				//判断父类的原型对象 ， 加保险.
+				if (person.prototype.constructor == Object.prototype.constructor) {
+					person.prototype.constructor = person; //手动还原父类的原型构造器.
+				};
+			};
+			
+		</script>
+		
+		<script type="text/javascript">
+			
+			/**
+			 * 工厂的 目的，在于判别 接口 最终的  用那个类来实例化。
+			 * 产生实例的过程，不需要使用new 关键字。
+			 * 最终达到的效果是多态， 和类与类之间的松耦合
+			 */
+			
+			(function () {
+			
+				var Pet = new Interface('Pet',['eat','run','sing','reginster']);
+				
+			
+				//宠物店
+				var PetShop = function () { }
+				
+				PetShop.prototype = {
+					
+					//出售宠物
+					sellPeyShop: function ( kind ) {
+						
+						//宠物对象
+						var Pet;
+						//kind 种类
+						switch ( kind ){
+							
+							case 'dog':
+								
+								//狗
+								pet = new Dog();
+								
+								break;
+							case 'cat':
+							
+								//猫
+								pet = new Cat();
+								
+								break;
+							case 'pig':
+								
+								//猪
+								pet = new Pig();
+							
+								break;
+							default:
+							
+								//鸟
+								pet = new Bird();
+								
+								break;
+						}
+						
+						//验证接口
+						Interface.ensureImplements('pet',Pet);
+						pet.eat();
+						pet.reginster();
+						
+						return pet;
+						
+					}
+					
+				}
+			
+				//宠物的基类
+				function BasePet () {
+					
+					this.reginster = function () {
+						
+						document.write('宠物登记...<br/>');
+						
+					}
+					
+					this.eat = function () {
+						
+						document.write("吃顿饱饭... <br/>");
+						
+					}
+					
+				}
+				
+				//实现
+				function Dog () {
+					
+					Dog.superClass.constructor.call(this);
+					
+					this.run = function () {
+						document.write("小狗跑步... <br/>");
+					}
+					
+					this.sing = function () {
+						document.write("小狗唱歌... <br/>");
+					}
+					
+				}
+				
+				function Pig () {
+					
+					Pig.superClass.constructor.call(this);
+					
+					this.run = function () {
+						document.write("小猪跑步... <br/>");
+					}
+					
+					this.sing = function () {
+						document.write("小猪唱歌... <br/>");
+					}
+					
+				}
+				
+				function Cat () {
+					
+					Cat.superClass.constructor.call(this);
+					
+					this.run = function () {
+						document.write("小猫跑步... <br/>");
+					}
+					
+					this.sing = function () {
+						document.write("小猫唱歌... <br/>");
+					}
+					
+				}
+				
+				
+				function Bird () {
+					
+					Bird.superClass.constructor.call(this);
+					
+					this.run = function () {
+						document.write("小鸟跑步... <br/>");
+					}
+					
+					this.sing = function () {
+						document.write("小鸟唱歌... <br/>");
+					}
+					
+				}
+				
+				//继承
+				extend(Dog,BasePet);
+				extend(Pig,BasePet);
+				extend(Cat,BasePet);
+				extend(Bird,BasePet);
+					
+				//Pcat 宠物店
+				var pcatShop = new PetShop();
+				
+				var flowerPig = pcatShop.sellPeyShop('pig');
+			
+				flowerPig.run();
+			
+			})();
+			
+		</script>
+		
+	</body>
+</html>

@@ -49,7 +49,7 @@
 			CompositeImpl.prototype.add=function(){ alert('add');  }
 			CompositeImpl.prototype.remove=function(){ alert('remove'); }
 			CompositeImpl.prototype.update=function(){}
-			CompositeImpl.prototype.select=function(){}
+//			CompositeImpl.prototype.select=function(){}
 			//3: 检验接口里的方法.
 			//检验通过， 不做任何操作， 代码继续执行.   不通过，抛出异常， Error.    //这个方法的目的，就是检测方法的 .
 			Interface.ensureImplements=function( obj ){  //核心检验方法.
@@ -70,7 +70,7 @@
 						//object[key];
 						if( !obj[methodName] || typeof obj[methodName] !== 'function' ){
 							//对象没有这个方法.
-							throw new Error('the method name ' + methodName + ' is not found!');
+							throw new Error('the method name "' + methodName + '" is not found!');
 						};
 					};
 				}

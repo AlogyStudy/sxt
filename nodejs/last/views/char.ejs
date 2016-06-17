@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+			.caozuo {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		
+		<h1>小小聊天室  欢迎： <span id="yonghu"><%=yonghuming%></span> </h1>
+		
+		<div>
+			<ul class="liebiao">
+				
+			</ul>
+		</div>
+		
+		<div class="caozuo">
+			<p>
+				<input type="text" id="neirong" name="neirong" />
+			</p>
+			<p>
+				<input type="button" name="" id="fayan" value="发言" />
+			</p>
+		</div>
+		
+		<script src="/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="http://cdn.bootcss.com/jquery/3.0.0/jquery.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			var socket = io();
+			
+			$('#fayan').click(function () {
+				
+				socket.emit('liaotian',{
+					'neirong': $('#neirong').val(),
+					'ren': 	$('#yonghu').html()
+				});
+				
+				$('#neirong').val('');
+				
+			});
+			
+			socket.on('liaotian',function ( msg ) {
+				
+				$('.liebiao').prepend('<li><b>'+ msg.ren  +'说:<b>'+ msg.neirong +'</li>');
+				
+			});
+			
+			
+		</script>
+		
+	</body>
+</html>

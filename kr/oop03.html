@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			//Object.getPrototypeOf() : 根据实例对象获得原型对象
+			
+			function Person () {
+			}
+			
+			Person.prototype.name = 'z1';
+			Person.prototype.age = 20;
+			
+			Person.prototype.sayName = function () {
+				
+				console.log( '我是原型对象方法' );
+				
+			}
+			
+//			var p1 = new Person();
+//			
+//			console.log( p1.name ); //z1
+//			
+//			console.log( Object.getPrototypeOf(p1) );
+//			console.log( Object.getPrototypeOf(p1) == Person.prototype ); //true
+				
+				
+				//每次代码读取一个对象的属性的时候：首先会进行一次搜索，搜索实例对象里，看看是否存在，如果没有，再去实例所对的原型中寻找属性.如果有则返回，如果两次都没有则返回undefined
+//				var p2 = new Person();
+//				p2.name = 'z10'; //实例对象 有name属性  //基于能够覆盖 的属性，可以把一些初始化的数据放在prototype中.
+//				
+//				console.log( p2.__proto__.name );
+//				console.log( Object.getPrototypeOf(p2).name );
+			
+				// 判断一个对象属性 是属于 原型属性 还是属性 实例属性
+				
+//				var p3 = new Person();	
+//				console.log( p3.name );//zf 是原型上的
+//				
+//				//hasOwnProperty() 是否是 实例对象自己的属性 
+//				console.log( p3.hasOwnProperty('name') ); //false    
+				
+				
+				//in 操作符，  无论是 原型的属性， 还是实例对象的属性， 都区分不开。 如果存在，返回true
+				//判断属性是否存在 实例对象 和 原型对象中. 
+				
+//				var p1 = new Person();
+//				console.log('name' in p1); //true  //表示，name的属性到底在不在p1的属性中  true
+//				var p2 = new Person();
+//			
+//				p1.name = 'zzz';
+//				
+//				console.log('name' in p1); //true
+
+					//判断一个属性  是否在 原型中
+					
+//					name  p1
+					
+//					var p1 = new Person();
+//					
+//					p1.name = '123';
+					
+					//在原型对象中，是否存在这个值
+					//@obj 当前对象
+					//@判断的属性
+//					function hasPrototypeProtoperty ( obj,attrName ) {
+//						
+//						return !obj.hasOwnProperty(attrName) && (attrName in obj);
+//						
+//					}
+//					
+//					console.log( hasPrototypeProtoperty(p1,'name') );
+					
+					
+//					function isPrototype ( attr,obj ) {
+//						
+//						if ( attr in obj && !obj.hasOwnProperty(attr) ) {
+//							
+//							return true;
+//							
+//						}
+//						
+//						return false;
+//						
+//					}
+//					
+//					console.log( isPrototype('name',p1) );
+				
+						
+						//ECMA5新特性  Object.keys(); 
+						//拿到当前对象中的所有keys， 返回一个数组
+						
+						var p1 = new Person();
+						p1.name = 'zz';
+						p1.age = 20;
+						
+						var attr = Object.keys(p1);
+						console.log( attr );  //["name", "age"]
+						
+						var attr2 = Object.keys(p1.__proto__);  
+						
+						console.log( attr2 );  //["name", "age", "sayName"]
+						
+						var attr3 = Object.keys(Person.prototype);  
+						
+						console.log( attr3 );  //["name", "age", "sayName"]
+						
+							
+							//ECMA5 
+							//constructor属性,是无法被枚举的. 正常的for-in循环是无法枚举. [eable = false];
+							
+							//Object.getOwnPropertyNames(); //枚举对象所有的属性：不管该内部属性能够被枚举.
+							
+							var attr4 = Object.getOwnPropertyNames(Person.prototype); //["constructor", "name", "age", "sayName"]
+							
+							console.log( attr3 );
+							
+							console.log( Person.prototype.isPrototypeOf( p1 ) ); //true
+						
+		</script>
+		
+	</body>
+</html>
