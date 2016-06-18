@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			//js 中怎么去实现继承 。  采用原型链的概念。
+			
+			//构造函数   原型对象  实例对象
+			//1 构造函数.prototype = 原型对象
+			//2 原型对象.constructor = 构造函数
+			//3 实例对象.__proto__ = 原型对象
+			//4 实例对象.construcotr = 构造函数
+			//5 原型对象.isPrototypeOf(实例对象)
+			// 构造函数  实例对象 (类和实例)
+			
+			function Person(){
+				
+			}
+			
+			var p1 = new Person();
+			
+			console.log( 'Person.prototype: ',Person.prototype );
+			console.log( 'PPerson.prototype.constructor: ',Person.prototype.constructor );
+			console.log( 'p1.__proto__: ',p1.__proto__ );
+			console.log( 'p1.constructor: ',p1.constructor );
+			console.log( Person.prototype.isPrototypeOf(p1) );
+			
+			
+			
+		</script>
+		
+	</body>
+</html>

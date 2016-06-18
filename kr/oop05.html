@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			//Array each方法
+			//ECMA5 forEach 循环遍历数组的每一项(只适合遍历一维数组)
+			
+//			var arr = [1,2,3,[5,6,[10]]];
+//			
+//			arr.forEach(function ( item,index,array ) {
+//				
+//				console.log( item );
+//				
+//			})
+				
+//				var arr = [1,2,3,[5,6,7,8,[110,23,[1000]]]];
+				var arr = [1,2,3,4,[5,6,7,[99,199,[1000]]]];
+
+//				var arr = [1,2,3,[4,[5,[6]]]];
+				
+				Array.prototype.each = function ( cb ) {
+					
+					try{
+						
+						//1， 目的： 遍历数组的每一个项    //计数器  记录当前遍历的元素位置
+						this.i || (this.i = 0);
+						
+						//2，严谨的判断什么时候去走each核心代码
+						//当数组的长度 大于 0 && 传递的参数 必须是为函数
+						if ( this.length > 0 && cb.constructor === Function ) {
+							
+							//循环遍历数组的每一项
+							//在写底层 代码的时候， 能不用for-in 循环， 就不使用 for-in循环.
+							while ( this.i < this.length ) {
+								
+								//核心代码
+								
+								//获取数组的每一项
+								var e = this[this.i];
+								
+								//如果当前元素获取到了，并且当前元素是一个数组.
+								if ( e && e.constructor === Array ) {
+								
+									//直接做递归操作
+									e.each(cb);
+									
+								} else {
+									
+									//如果不是数组  (说明是单个元素)
+									//第一种 ：
+//									var obj = true;
+//									
+//									cb.apply(obj,[e]);   //希望使用绑定的方式去做  //绑定为 null ，但是 希望是  new出来一个 对象。 比如 obj = true;
+									
+									
+//									第二种:
+//									cb.apply(null,[e]);   //希望使用绑定的方式去做 
+									
+									
+										//第三种
+										cb.call(null,e);  //目的就是为了执行以下，传递的函数，并且把遍历到的每一项参数传递回去.并不关心执行后的作用域.
+									
+								}
+								
+								this.i++;
+								
+							}
+							
+							this.i = null;  //while循环过后， Array挂载的 i 是没有用处， 释放内存，垃圾回收机制  回收.
+							
+						}
+						
+					}catch(e){
+						//do someting
+						
+					}
+					
+					return this;
+					
+				}
+				
+				arr.each(function ( item,index ) {
+					
+					console.log( item );
+					
+				});
+			
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

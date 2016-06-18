@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			
+			//简单原型
+			
+//			function Person () {
+//				
+//			}
+//			
+//			Person.prototype = {
+//				
+////				constructor: Person,
+//				
+//				name: 'zz',
+//				age: 20,
+//				
+//				say: function () {
+//					console.log( this.age );
+//				}
+//				
+//			}
+			
+			
+//			ECMA5中的Object.defineProperty()方法可以为原型对象重新加入构造器。
+			//3个参数，  参数1：重新设置构造的对象 （给什么对象设置） 	参数2：设置什么属性		参数3：options配置项 (要怎么去设置)
+//			Object.defineProperty(Person.prototype,'constructor',{
+//				enumerable: false,  //是否是 能够 被枚举
+//				value: Person  //值   构造器的 引用
+//			});
+			
+			
+//			var p1 = new Person();
+//			
+//			console.log( p1.name );
+//			p1.say();
+//			
+//			console.log( Person.prototype.constructor );
+//			
+//				
+//			for ( var attr in p1 ) {
+//				
+//				console.log( attr );
+				
+//			}	
+
+
+//				function Person () {
+//					
+//				}
+//				
+//				var p1 = new Person();
+//				
+//				//原型对象的构造器默认为  Person   //在后面添加 ，是 可以执行的。
+//				Person.prototype.say = function () {
+//					
+//					console.log( '123' );
+//					
+//				}
+//				
+//				console.log( Person.prototype.constructor );
+//				
+//				console.log( p1.constructor );
+//				
+//				p1.say();
+				
+				
+					function Person () {
+						
+					}
+					
+					
+					var p1 = new Person();  // {}
+					 
+					
+					Person.prototype = {
+						constructor: Person,
+						name: 'zf',
+						age: 20,
+						say: function () {
+							console.log('原型');
+						}
+					}
+					
+					//先把原型对象写好，然后再实例化。
+					
+					//p1.say();	//error 因为  	原型对象里面没有任何属性和方法
+					
+					var p2 = new Person();
+					
+					p2.say();
+					
+					//注意  简单原型使用的顺序(实例对象必须在原型对象之后创建)
+					
+				
+			
+		</script>
+		
+	</body>
+</html>

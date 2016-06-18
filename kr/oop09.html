@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			//父类的构造函数  Sup
+			function Sup ( name ) {
+				
+				this.name = name;
+				
+			}
+			
+			//父类的原型对象
+			Sup.prototype = {
+				constructor: Sup,
+				sayName: function () {
+					console.log(this.name);
+				}
+			}
+			
+			//子类的构造函数 Sub
+			function Sub ( age ) {
+				
+				this.age = age;
+				
+			}
+			
+			//如果子类的原型对象  等于 父类的 实例
+			
+			//1, 显然此时的原型对象将包含一个指向另一个原型的指针
+			//2, 相应的另一个原型中也包含着一个指向另一个构造函数的指针。
+			
+//			实例对象.__proto__ = 原型对象
+//				Sup的实例对象  和 Sup的原型对象 有一个关系
+			
+			Sub.prototype = new Sup('zf');
+			
+//			console.log( Sub.prototype.constructor );  //function Sup () {}
+//			
+//			console.log( Sub.prototype.__proto__ );    //Sup 的 原型对象
+			
+			
+			var sub1 = new Sub(20);
+			
+			console.log( sub1.name );  //zf
+			sub1.sayName();  //zf
+						
+		</script>
+		
+	</body>
+</html>
