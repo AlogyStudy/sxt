@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			function test ( aa ) {
+				
+				aa.call(this);
+				
+			}
+			
+			test(function () {
+				console.log( this );
+				alert('123');
+			});
+			
+		</script>
+		
+	</body>
+</html>

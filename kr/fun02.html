@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+		
+//			var d1 = new Date();
+//			var t1 = d1.getTime();
+//			
+//			for ( var i=0; i<10000000; i++ ) {
+//				
+////				function test1 () {} // 342ms  //在函数体只会被声明一次 ，其它地方并不再解析，就可以调用 。 //静态 //只会编译一次，放入内存中。
+//
+//				var test2 = function () {}  //354ms
+//					
+////					var test3 = new Function();  //8400ms  //每次执行，都是重新new一个 函数。 //new 完之后， 就销毁了。不占用内存。动态创建一次。
+//				
+//			}
+//			var d2 = new Date();
+//			var t2 = d2.getTime();
+//			
+//			console.log( t2 - d1 );
+
+
+				//解析顺序
+//				function f(){return 1;} 		
+//				
+//				alert(f());   //4
+//				
+//				var f = new Function("return 2;");
+//				
+//				alert(f());  //2
+//				
+//				var f = function(){return 3;}
+//				
+//				alert(f());  //3 
+//				
+//				function f(){return 4;}
+//				
+//				alert(f()); //3
+//				
+//				var f = new Function("return 5");
+//				
+//				alert(f());	 //5
+//				
+//				var f = function(){return 6 ;}
+//				
+//				alert(f());	//6
+				
+				//AO
+				//f return 4;
+				
+				
+//				函数作用域
+
+				var k = 1 ; 
+				function t1(){
+					var k = 2 ; 
+//					function test(){return k ;}  //2
+//					var test = function(){ return k};  //2
+					var test = new Function('return k;');  //1 
+					alert(test());
+				}
+				t1();
+
+		</script>
+		
+	</body>
+</html>
