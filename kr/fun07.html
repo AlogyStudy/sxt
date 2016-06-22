@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			
+			//垃圾收集  ，标记清除
+			
+//			function test () {
+//				
+//				var a = 10;   //mark - 被使用
+//				var b = 20;   //mark - 被使用
+//				
+//			}
+//			
+//			test();  //执行完毕 之后 ，a，b又被标记使用。  mark - 没有被使用
+			//在间隔时间中 回收。  如果mark 没有被使用， 则回收。
+			
+			
+			//引用计数
+			//如果变量被引用 ，  count = 1;
+			function test2 () {
+				
+				var a = 10;   //count = 1;
+				var b = 20;
+				
+				var c;
+				c = a;  //count++ = 2; //a 被 c 所使用 ，引用。
+				
+				a = 50;  //count--;   //等待 count 为 0 的时候， 垃圾回收机制  就回收
+				
+			}
+			
+		</script>
+		
+	</body>
+</html>

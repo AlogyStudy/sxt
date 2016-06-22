@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			function Person ( name,age ) {
+					
+				this.name = name;
+				this.age = age;
+				
+			}
+			
+			Person.prototype.sayName = function () {
+				
+				console.log( this.name );
+				
+			}
+			
+			var actor = _new(Person, "张三", 28);
+			
+			actor.sayName();
+			
+			console.log( actor );
+			
+			/**
+			 * new 关键字 模拟实现
+			 */
+			function _new () {
+				
+				//转数组
+				var args = [].slice.call(arguments);
+				
+				//获取构造器
+				var constructor = args.shift();
+				
+				var self = Object.create(constructor.prototype); 
+				
+				//执行构造函数
+				var reslut = constructor.apply( self,args );
+				
+				return (typeof reslut === 'object' && reslut !== null) ? reslut : self;
+				
+			}
+			
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+//			var name = "xiao A";
+//			
+//			var obj = {
+//				
+//	      name : "xiao B",
+//		      
+//	      getName: function(){
+//		      	
+//		      console.log( this );	
+//		      	
+//					return function(){
+//						
+//						return this.name;
+//						
+//					}
+//					
+//				}
+//		      
+//			};
+//			
+////			console.log(obj.getName()());  //xiao A
+//			var zf = obj.getName();//全局作用域
+//			zf();
+//			
+//			
+//			function test () {
+//				
+//				return function (){
+//					
+//					console.log( this );
+//					
+//				}
+//				
+//			}
+//			
+//			var q = (function () {
+//				
+//				return {
+//					test1: function () {
+//						
+//						console.log(this);
+//						
+//					}
+//				}
+//				
+//			})();
+//			
+////			test()() 
+//			
+////			console.log( q.test1() );
+
+
+//			var name = "xiao A";
+//			
+//			var obj = {
+//				
+//	      name : "xiao B",
+//		      
+//	      getName: function(){
+//		      	
+//		      var self = this;	
+//		      	
+//					return function(){
+//						
+//						return self.name;
+//						
+//					}
+//					
+//				}
+//		      
+//			};
+//			
+////			console.log( obj.getName().call(obj) );
+//			console.log( obj.getName()() );
+//			
+//			console.log( obj.getName() );
+			
+			//闭包： 一个函数， 可以访问另外一个作用域中的变量
+			//封闭性，(类似食品包装袋一样，封闭起来，保质期延长，变量的访问范围的延长) //private 起到一个保护变量的作用
+			
+			//1 level 
+			function f(x){ //2 level
+				
+				var temp = x;  //局部变量    //temp 标记 已经没有被使用
+				  
+				return function(x){ //3 level   (function 有一个执行域)
+					
+					temp += x;   //temp 下一级作用域仍然被引用 ， 标记为 使用
+					
+					alert(temp);
+			    
+				}
+				
+			}				
+			
+			//js 垃圾回收机制，当函数执行完毕后，内部所有的局部变量都集体的被回收。
+			
+			var a = f(50);
+			
+			a(5);  //55
+			
+			a(10); //65
+			
+			a(20); //85
+
+			
+		</script>
+		
+	</body>
+</html>

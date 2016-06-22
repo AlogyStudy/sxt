@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			
+			//块级作用域 
+			
+/*			function test () {
+				
+				for ( var i=1; i<=5; i++ ) {
+					
+					console.log(i);
+					
+				}	
+				
+				console.log(i);
+				
+			}
+			
+			test();*/
+			
+			//当函数执行之后， 变量就被回收			
+				
+			function test () {
+				
+				(function () {  //函数有一个单独的作用域，外面无法访问到  i 。
+					
+					for ( var i=0; i<=5; i++ ) {
+						
+						console.log( i );
+						
+					}
+					
+				})();
+				
+				console.log( i );  //报错，无法找到
+				
+			}
+			
+			test();
+			
+		</script>
+		
+	</body>
+</html>

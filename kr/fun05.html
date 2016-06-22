@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script>
+			
+			//call， apply  简单 用法： 绑定一些函数  用于传递参数  调用
+			
+//			function sum ( x,y ) {
+//				
+//				return x + y;
+//				
+//			}
+//			
+//			function call1 ( num1,num2 ) {
+//				
+//				return sum.call(this,num1,num2);
+//				
+//			}
+//			
+//			function apply1 ( num1,num2 ) {
+//				
+//				return sum.apply(this,[num1,num2])
+//				
+//			}
+//			
+//			//将一个函数绑定到一个特定的作用域中，然后传递特定作用域中的参数。
+//			
+//			console.log( call1(10,10) );
+//			console.log( apply1(20,10) );
+
+
+				//扩充作用域,底层也经常使用这两个方法，用于绑定不同的作用域。
+				//把一个函数赋给一个对象， 赋完之后，还可以重用，赋给另外一个对象。
+				
+//				window.color = 'pink';
+//				
+//				var obj = {
+//					color: 'tan'
+//				}
+//				
+//				function showColor () {
+//					
+//					console.log( this.color );
+//					
+//				}
+//				
+//				showColor.call(window);  
+////				showColor.call(this);
+//				showColor.apply(obj);
+
+
+//				call方法简单的实现。
+
+//					function test1 ( a,b ) {
+//						
+//						return a + b;
+//						
+//					}
+//					
+//					//自定义对象
+//					function Obj ( x,y ) {
+//						
+//						return x * y;
+//						
+//					}
+//					
+//					
+//					var obj = new Obj();
+//					
+////					console.log( test1.call(obj,10,20) );
+////				
+////					obj.method = test1;
+////					
+////					obj.method(10,20);
+////					
+////					delete obj.method;
+//					
+//					Function.prototype.callz = function ( context ) {
+//						
+//						context.method = this;
+//						
+//						
+//						
+//						for ( var i=1 ;i<arguments.length; i++ ) {
+//							
+////							console.log( arguments[i] );
+//							return this(arguments[i]);
+////							var g = context.method(arguments[i]);
+//							
+////							console.log( g ,'--');
+//							
+//						}
+//						
+////						return context.method;
+////						delete context.method;
+//						
+//					}
+//					
+//					console.log( test1.callz(obj,10,20) );
+//					
+//					
+//					
+					Function.prototype.apply = function (obj, argu) {
+						
+			    //apply函数兼容
+			        var a = [], f = null, i = 0;
+			        
+			        if ( argu && argu.constructor === Array) 
+			        	for (; i < argu.length ; i ++) 
+			        	a = "argu[" + i + "]";
+			        //把这个被apply的函数追到自己的原型对象中，这样就调用一下这个函数，就可以实现继承里面所有的引用。
+			        if (obj) obj.constructor.prototype.___caller = this;
+			        f = eval((obj ? "obj.___caller" : "this") + "(" + a.join(",") + ");");
+			        //用完了，就删除掉它
+			        if (obj) delete obj.constructor.prototype.___caller;
+			        return f;
+			    };
+			    
+			    Function.prototype.call = function (obj) {
+			    	
+			    //call函数兼容
+			    
+			        for (var a = [], i = 1 ; i < arguments.length ; i ++) a[i - 1] = arguments;
+			        
+			        return this.apply(obj, a);
+			        
+			    };
+					
+					
+					
+					
+				
+			
+		</script>
+		
+	</body>
+</html>
