@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<script type="text/javascript">
+			
+//			var arr = [234,23,345,46,45,645,56];
+//			
+//			//1个参数的时候，表示传值  返回索引位置
+//			var idxVal = arr.indexOf(23);
+//			
+//			//2个参数的时候， 第一个表示起始位置，第二个参数是 传值
+//			var idxVal = arr.indexOf(2,3);
+//			
+//			//查找数组比较的时候 是 "===" 
+//			
+//			//找不到返回 -1
+//			
+//			console.log( idxVal );
+
+
+//				lastIndexOf();
+
+				
+				//5个 新加的 迭代的方法
+				//every : 对于数组每一个元素进行一个函数的运行  如果函数都返回true， 最后则返回true。  如果有一个返回false 最后结果则返回false。
+				
+				var arr =  [1,2,3,4,3,2,4,6];
+				
+//				var reslut = arr.every(function ( item,index,array ) {
+//					
+//					return item > 0;
+//					
+//				});
+//				
+//				console.log( reslut );  //true
+				
+				//filter : 对于数组的每一个元素进行一个函数的运行  给定的函数执行， 把过滤后的结果返回。
+//				var reslut = arr.filter(function ( item,index,array ) {
+//					
+//					return item > 2;  //所有大于2 的过滤出来
+//					
+//				})
+//				
+//				console.log( reslut );  //[3, 4, 3, 4, 6]
+				
+				
+//				Array.prototype.filterZ = function ( cb ) {
+//					
+//					var reslut = [];
+//					
+//					try{
+//						
+//						if ( cb && cb.constructor === Function ) {
+//								
+//							for ( var i=0; i<this.length; i++ ) {
+//								
+//								if ( cb.call(this[i],this[i],i,arr) ) {
+//									
+//									reslut.push(this[i]);
+//									
+//								}
+//						
+//							}
+//							
+//						}
+//						
+//					}catch(e){
+//						//TODO handle the exception
+//					}
+//					
+//					return reslut ? reslut : '';
+//					
+//				}
+//
+//				var a = arr.filterZ(function ( item,index,arr ) {
+//					
+//					return item > 2;
+//					
+//				});
+//				console.log( a );
+
+
+				//forEach : 循环数组每一项，  并执行一个方法
+				
+//				arr.forEach(function ( item,index,array ) {
+//					
+//					console.log( item );
+//					
+//				});
+				
+				
+				//map  : 对于数组的每一个元素进行一个函数的运行  可以经过函数执行完毕   把新的结果返回
+				
+//				var reslut = arr.map(function ( item,index,array ) {
+//					
+//					return item * 3;
+//					
+//				}); 
+//				
+//				console.log( reslut );  //[3, 6, 9, 12, 9, 6, 12, 18]
+				
+				//some : 对于数组每一个元素进行一个函数的运行  如果有一项返回true  最后则返回true  如果每一项都返回false， 最后才返回false
+				
+//				var reslut = arr.some(function ( item,index,array ) {
+//					
+//					return item > 5;  //有一个返回true， 就返回true
+//					
+//				});
+//				
+//				console.log( reslut );  //true
+
+
+					//---------------------------
+					
+					//reduce  reduceRight
+					
+					//前一个值， 当前值， 索引位置， array
+					var reslut = arr.reduce(function ( prev,cur,index,array ) {
+						
+						return prev + cur;
+						
+					});
+					
+					console.log( reslut );
+					
+					// reduceRight 从右开始遍历
+					var reslut1 = arr.reduceRight(function ( prev,cur,index,array ) {
+						
+						return prev + cur;
+						
+					});
+					
+					console.log(  reslut );
+					
+			
+			
+		</script>
+		
+	</body>
+</html>

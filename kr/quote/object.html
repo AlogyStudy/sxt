@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			//Object 所有类的基础类
+			
+			var obj = new Object();
+			
+			var obj2 = {}; //实例化对象
+			
+			//给对象设置属性
+			obj2.name = 'zf';
+			obj2.age = 22;
+			obj2.say = function () {
+				
+				console.log( 123 );
+				
+			}
+			
+			delete obj2.name;
+			
+			console.log( obj2.name );
+			console.log( obj2 );
+			
+			//遍历js 对象  for-in
+			
+			console.log( obj2.constructor );
+			
+			
+		</script>
+		
+	</body>
+</html>
