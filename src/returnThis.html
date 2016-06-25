@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			//简单函数链式调用 
+			
+			function Dog () {
+				
+				this.run = function () {
+					
+					console.log( 'dog is run...' );
+					
+					return this;
+					
+				}
+				
+				this.eat = function () {
+					
+					console.log( 'dog is eat...' );
+					
+					return this;
+					
+				}
+				
+				this.slepp = function () {
+					
+					console.log('dog is sleep');
+					
+					return this;
+					
+				}
+				
+			}
+			
+			var d1 = new Dog();
+			
+			d1.run().eat().slepp();
+			
+		</script>
+		
+	</body>
+</html>

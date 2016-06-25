@@ -10,44 +10,78 @@
 			
 			//惰性单体  (和闭包单体类似)
 			
-			var Ext = {};
+//			var Ext = {};
+//			
+//			Ext.Base = (function () {
+//				
+//				//私有变量 控制返回的单体对象
+//				var uniqInstance;  
+//				
+//				//需要一个构造器  init 初始化单体对象的方法
+//				function Init () {
+//					
+//					//私有成员
+//					var a1 = 10;
+//					var a2 = true;
+//					
+//					var fun1 = function () {
+//						
+//						console.log( a1 );
+//						
+//					}
+//					
+//					return {
+//						attr1: a1,
+//						attr2: a2,
+//						fun1: fun1
+//					}
+//					
+//				}
+//				
+//				return {
+//					
+//					getInstance: function () {
+//						
+//						if ( !uniqInstance ) {  //不存在 ，创建单体实例
+//							
+//							uniqInstance = new Init();					
+//							
+//						}
+//						
+//						return uniqInstance;
+//						
+//					}
+//					
+//				}
+//				
+//			})()
+//			
+//			var init = Ext.Base.getInstance();
+//			
+//			init.fun1(); 
 			
-			Ext.Base = (function () {
+			
+				//分支单体  (判断程序的分支 - 浏览器差异的检测)
+				//简单判断
+				var Ext = {};
 				
-				//私有变量 控制返回的单体对象
-				var uniqInstance;  
+				var def = true; 
 				
-				
-				//需要一个构造器  init 初始化单体对象的方法
-				
-				
-				//私有成员
-				var a1 = 10;
-				var a2 = true;
-				
-				var fun1 = function () {
+				Ext.More = (function () {
 					
-					console.log( a1 );
+					var ff = {
+						attr1: 'ff'
+					};
 					
-				}
-				
-				return {
-					getInstance: function () {
-						
-						if ( !uniqInstance ) {  //不存在创建单体实例
-							
-												
-							
-						}
-						
-						return uniqInstance;
-						
+					var ie = {
+						attr1: 'ie'
 					}
-				}
 					
-				
-			})()
+					return def ? ff : ie;
+					
+				})()
 			
+				console.log( Ext.More.attr1 ); //ff
 			
 		</script>
 		

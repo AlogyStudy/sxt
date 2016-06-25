@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			//模拟jquery底层链式编程
+				
+			// 函数自执行 特点：
+			// 1： 程序启动时候   里面代码自动执行
+			// 2： 内部的成员变量  外部无法访问 (除了不加var修饰的变量)
+			
+			//块级 作用域   
+			
+			(function ( window,undefined ) {
+				
+				//$ 最常用的对象  返回给外界  //大型程序开发   一般使用 '_'作为私有的对象
+					
+				function _$ ( args ) {
+					
+					//实现代码...
+					
+				}
+				
+				//在Function类上 扩展 一个可以实现 链式编程的方法
+				Function.prototype.method = function ( methodName,fn ) {  //实现链式编程， 方法的名字 和  进行调用的函数是什么
+					
+					this.prototype[methodName] = fn;
+					
+					return this; //链式编程
+					
+				}
+				
+				// 在 _$ 原型对象上  加一些公共的方法
+				_$.prototype = {
+					
+					constructor: _$,
+					
+					addEvent: function ( type,cb ) {
+						
+						alert('123');
+						
+						return this;
+						
+//						this._$('')
+//							oDiv.onclick = cb;
+//							
+//							$('div').on('click',function () {
+//								
+//								
+//								
+//							});
+
+					},
+					
+					setStyle: function () {
+						
+						alert('setStyle');
+						
+						return this;
+						
+					}
+				}
+				
+				//window上注册 一个 全局变量
+				window.$ = _$;
+				
+				//准备方法
+				_$.onReady = function ( cb ) {
+					
+					//1,实例化  _$ 对象 ，注册到 window上
+					window.$ = function () {
+						
+						return new _$(); 
+						
+					}
+					
+					//2： 执行传入的代码
+					cb.call(window);
+					
+					//3： 实现链式编程 
+					_$.method('addEvent',function () {}).method('setStyle',function () {});
+					
+				}
+				
+			})( window )  //程序的入口  window传入作用域中			
+			
+			
+//			$(function () {
+//				
+				//jquery 代码
+//				
+//			});
+			
+			$.onReady(function () {
+				
+				console.log( $() );
+				
+				$('div').setStyle().addEvent();
+				
+			});
+			
+		</script>
+		
+	</body>
+</html>
