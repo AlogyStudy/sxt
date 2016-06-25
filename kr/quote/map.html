@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			//模拟map 
+			//模拟java里的Map
+			
+			//简单实现 map
+			
+			function Map () {
+				
+				//priveate 的对象来保存  key 和 val
+				var obj = {};
+				
+				// put 方法
+				this.put = function ( key,val ) {
+					
+					
+					obj[key] = val;   //把键值对 绑定到object上.
+					
+				}
+				
+				//获得map 容器的个数
+				this.size = function () {
+					
+					var count = 0;
+					
+					for ( var i in obj ) {
+						
+						count++;
+						
+					}
+					
+					return count;
+					
+				}
+				
+				//根据key  得到  val
+				this.get = function ( key ) {
+					
+					return obj[key] || (obj[key] === 0) || (obj[key] === false) ? obj[key] : null;
+					
+				}
+				
+				// remove 删除方法
+				this.remove = function ( key ) {
+					
+					if ( obj[key] || obj[key] === 0 || obj[key] === false ) delete obj[key];  
+					
+				}
+				
+				//eachMap 遍历 map 容器的方法
+				this.eachMap = function ( cb ) {
+					
+					if ( cb && cb.constructor === Function ) {
+						
+						for ( var i in obj ) {
+							
+							cb.call(this,obj[i],i);
+							
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+			var m = new Map();
+			
+			m.put('01',120);
+			m.put('02','tan');
+			
+//			console.log( m.size() );
+//			
+//			console.log( m.get('0') );
+			
+//			m.remove('01');
+//			console.log( m.get('01'),'--' );
+			
+			m.eachMap(function ( item,val ) {
+				
+				console.log( item,val,'---' );
+				
+			});
+			
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			//singleton 单体模式
+			//1 简单单体模式   （只能创建一个实例）//无法通过new 关键字来实例化.
+//			var Singleton = {  //当成模板类 
+//				attr1: true,
+//				attr2: 10,
+//				
+//				method1: function () {
+//					
+//					console.log( this.attr1 );
+//					
+//				}
+//				
+//			}
+//			
+//			Singleton.method1();
+//			
+			
+			//划分命名空间
+
+			
+//			闭包单体
+
+//				利用闭包来创建单体  , 闭包主要的目的 ， 保护数据
+
+				var alogy = {};
+				alogy.singleton = (function () {
+					
+					
+					//添加私有成员
+					
+					var a = 100;
+					var fn1 = function () {
+						
+						console.log( a );							
+						
+					}
+					
+					// 块级作用域里的执行结果赋值 单体对象
+					return {
+						attr1: 10,
+						attr2: 20,
+						method: function () {
+							console.log( this.attr1 );
+						},
+						fn1: fn1
+					}
+						
+						
+				})();
+
+				alogy.singleton.method();
+				alogy.singleton.fn1();
+
+		</script>
+		
+	</body>
+</html>
