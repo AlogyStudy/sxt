@@ -1,0 +1,2 @@
+[3708:0000000000456850]        8 ms: Scavenge 2.1 (37.0) -> 2.0 (37.0) MB, 0.6 / 0 ms [allocation failure].
+[3708:0000000000456850]       11 ms: Scavenge 2.1 (37.0) -> 2.1 (38.0) MB, 0.6 / 0 ms [allocation failure].
