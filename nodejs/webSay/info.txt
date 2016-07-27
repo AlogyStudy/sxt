@@ -1,0 +1,16 @@
+
+
+E:\wamp\www\github\sxt\nodejs\webSay\public\_style>sass --style expanded app.scs
+s ../css/app.css
+
+注册，登陆
+	默认状态下，是默认的头像。
+
+注册模块
+	用户表单： formidable
+	用户名是否显示使用 : express-session
+		req设置session。标识，和用户名
+		
+	
+	错误：业务会写在res.send(); 之后
+	
