@@ -43,3 +43,6 @@
     line-height: $defaultPadding / 2 * 5;
 }
 
+.form-signin-heading {
+    @include tc;
+}

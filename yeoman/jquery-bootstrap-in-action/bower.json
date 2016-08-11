@@ -1,0 +1,25 @@
+{
+  "name": "jquery-bootstrap-in-action",
+  "homepage": "https://github.com/AlogyStudy/sxt",
+  "authors": [
+    "Xingzhang Lin <1129507496@qq.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0"
+  },
+  "devDEpendencies": {},
+  "devDependencies": {
+    "angular": "^1.5.8"
+  }
+}

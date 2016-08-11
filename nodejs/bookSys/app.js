@@ -18,4 +18,6 @@ app.get('/edit',router.edit);
 
 app.get('/doedit',router.doedit);
 
-app.listen(80);
+app.listen(8088);
+
+console.log('8088端口启动成功');
